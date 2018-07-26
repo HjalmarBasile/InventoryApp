@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">InventoryApp</string>
+
+    <string name="db_info">Database Info</string>
+
+    <!-- Title text for the empty view [CHAR LIMIT=50] -->
+    <string name="empty_view_title_text">Your library is still empty...</string>
+
+</resources>
