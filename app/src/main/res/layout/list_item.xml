@@ -1,28 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- Layout for a single item in the list of products -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_margin">
+    android:layout_height="?android:attr/listPreferredItemHeightLarge"
+    android:paddingBottom="@dimen/product_item_padding_vertical"
+    android:paddingEnd="@dimen/product_item_padding_horizontal"
+    android:paddingStart="@dimen/product_item_padding_horizontal"
+    android:paddingTop="@dimen/product_item_padding_vertical">
 
     <TextView
         android:id="@+id/item_product_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
+        style="@style/ItemConstraintLayout"
+        android:fontFamily="sans-serif"
         android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="#2B3D4D"
-        tools:text="Pet Name" />
+        android:textColor="@color/primary_text"
+        android:textStyle="bold"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="@dimen/constraint_height_percent_primary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/constraint_width_percent_primary"
+        tools:text="@string/tools_text_product_name" />
 
     <TextView
-        android:id="@+id/item_product_summary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:id="@+id/item_product_price"
+        style="@style/ItemConstraintLayout"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textAllCaps="true"
         android:textAppearance="?android:textAppearanceSmall"
-        android:textColor="#AEB6BD"
-        tools:text="Pet summary" />
-</LinearLayout>
+        android:textColor="@color/secondary_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="@dimen/constraint_height_percent_secondary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/constraint_width_percent_primary"
+        tools:text="@string/tools_text_product_price" />
+
+    <Button
+        android:id="@+id/item_button_sale"
+        style="@style/ItemConstraintLayout"
+        android:fontFamily="sans-serif"
+        android:text="@string/text_button_sale"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="@color/primary_text"
+        android:textStyle="bold"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="@dimen/constraint_height_percent_primary"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/constraint_width_percent_secondary" />
+
+    <TextView
+        android:id="@+id/item_product_quantity"
+        style="@style/ItemConstraintLayout"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textAllCaps="true"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="@dimen/constraint_height_percent_secondary"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="@dimen/constraint_width_percent_secondary"
+        tools:text="@string/tools_text_product_quantity" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,9 +1,15 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">InventoryApp</string>
 
     <string name="db_info">Database Info</string>
 
+    <!-- List item string resources -->
+    <string name="tools_text_product_name">Product name</string>
+    <string name="tools_text_product_price">Price €<xliff:g example="125" id="product_price">%d</xliff:g></string>
+    <string name="text_button_sale">Sale</string>
+    <string name="tools_text_product_quantity">Quantity <xliff:g example="144" id="product_quantity">%d</xliff:g></string>
+
     <!-- Title text for the empty view [CHAR LIMIT=50] -->
-    <string name="empty_view_title_text">Your library is still empty...</string>
+    <string name="empty_view_title_text">Your library is still empty</string>
 
 </resources>

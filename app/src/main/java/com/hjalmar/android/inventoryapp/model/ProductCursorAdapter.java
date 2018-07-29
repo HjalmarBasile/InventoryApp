@@ -24,17 +24,22 @@ public class ProductCursorAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View newView = inflater.inflate(R.layout.list_item, parent, false);
-        return newView;
+        return inflater.inflate(R.layout.list_item, parent, false);
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         TextView nameView = view.findViewById(R.id.item_product_name);
-        TextView summaryView = view.findViewById(R.id.item_product_summary);
+        TextView priceView = view.findViewById(R.id.item_product_price);
+        TextView quantityView = view.findViewById(R.id.item_product_quantity);
 
-        nameView.setText(cursor.getString(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_NAME)));
-        summaryView.setText("id: " + cursor.getInt(cursor.getColumnIndex(ProductEntry._ID)));
+        String currentProductName = cursor.getString(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_NAME));
+        Integer currentProductPrice = cursor.getInt(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_PRICE));
+        Integer currentProductQuantity = cursor.getInt(cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_QUANTITY));
+
+        nameView.setText(currentProductName);
+        priceView.setText(context.getString(R.string.tools_text_product_price, currentProductPrice));
+        quantityView.setText(context.getString(R.string.tools_text_product_quantity, currentProductQuantity));
     }
 
 }

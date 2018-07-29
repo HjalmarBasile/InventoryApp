@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         productListView.setAdapter(mCursorAdapter);
 
         getSupportLoaderManager().initLoader(PRODUCTS_LOADER_ID, null, this);
-
-        insertDummyProducts();
     }
 
     /**
@@ -91,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, @Nullable Bundle args) {
-        String[] projection = new String[]{ProductEntry._ID, ProductEntry.COLUMN_PRODUCT_NAME, ProductEntry.COLUMN_PRODUCT_SUPPLIER_NAME};
-        return new CursorLoader(this, ProductEntry.CONTENT_URI, projection, null, null, null);
+        //String[] projection = new String[]{ProductEntry._ID, ProductEntry.COLUMN_PRODUCT_NAME, ProductEntry.COLUMN_PRODUCT_SUPPLIER_NAME};
+        return new CursorLoader(this, ProductEntry.CONTENT_URI, null, null, null, null);
     }
 
     @Override
