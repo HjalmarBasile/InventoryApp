@@ -10,7 +10,7 @@
     <string name="tools_text_product_quantity">Quantity <xliff:g example="144" id="product_quantity">%d</xliff:g></string>
 
     <!-- Title text for the empty view [CHAR LIMIT=50] -->
-    <string name="empty_view_title_text">Your library is still empty</string>
+    <string name="empty_view_title_text">Your store is still empty.\n\nFill in all product and supplier details\nto add a new item.</string>
 
     <!-- Menu editor -->
     <string name="menu_editor_action_save">Save</string>
