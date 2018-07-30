@@ -33,4 +33,8 @@
     <string name="activity_detail_title_new_product">Add Product</string>
     <string name="activity_detail_title_edit_product">Edit Product</string>
 
+
+    <string name="detail_save_product_success">Product successfully saved</string>
+    <string name="detail_save_product_failure">Error while saving the product</string>
+
 </resources>
