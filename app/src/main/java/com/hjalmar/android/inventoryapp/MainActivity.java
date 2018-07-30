@@ -2,9 +2,12 @@ package com.hjalmar.android.inventoryapp;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.empty_view)
     TextView emptyView;
 
+    @BindView(R.id.action_button)
+    FloatingActionButton fab;
+
     private final QueryCursorLoader mQueryCursorLoader = new QueryCursorLoader(this);
 
     @Override
@@ -33,10 +39,17 @@ public class MainActivity extends AppCompatActivity {
 
         productListView.setAdapter(mQueryCursorLoader.getProductCursorAdapter());
         productListView.setEmptyView(emptyView);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                startActivity(intent);
+            }
+        });
 
         getSupportLoaderManager().initLoader(QueryCursorLoader.PRODUCTS_LOADER_ID, null, mQueryCursorLoader);
 
-        insertDummyProducts();
+        //insertDummyProducts();
     }
 
     /**

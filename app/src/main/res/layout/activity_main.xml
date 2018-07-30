@@ -26,4 +26,13 @@
         android:text="@string/empty_view_title_text"
         android:textAlignment="center" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/action_button_margin"
+        android:src="@drawable/ic_add_white_48dp" />
+
 </RelativeLayout>

@@ -2,6 +2,7 @@
 <resources>
     <dimen name="product_item_padding_horizontal">16dp</dimen>
     <dimen name="product_item_padding_vertical">8dp</dimen>
+    <dimen name="action_button_margin">16dp</dimen>
 
     <item name="constraint_height_percent_primary" format="float" type="dimen">0.6</item>
     <item name="constraint_height_percent_secondary" format="float" type="dimen">0.4</item>
