@@ -26,6 +26,8 @@ public class DetailActivity extends AppCompatActivity {
                 break;
             case R.id.action_delete:
                 break;
+            case android.R.id.home:
+                break;
             default:
                 throw new IllegalArgumentException("Unexpected action id: " + item.getItemId());
         }
