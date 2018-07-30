@@ -21,4 +21,13 @@
     <string name="sale_failure">Sale did not succeed</string>
     <string name="sale_not_in_stock">Not in stock</string>
 
+    <string name="category_product_detail">Product</string>
+    <string name="hint_product_name">Name</string>
+    <string name="hint_product_price">Price (€)</string>
+    <string name="hint_product_quantity">Quantity</string>
+
+    <string name="category_supplier_detail">Supplier</string>
+    <string name="hint_supplier_name">Name</string>
+    <string name="hint_supplier_phone_number">Phone Number</string>
+
 </resources>
