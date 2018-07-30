@@ -12,4 +12,8 @@
     <!-- Title text for the empty view [CHAR LIMIT=50] -->
     <string name="empty_view_title_text">Your library is still empty</string>
 
+    <!-- Menu editor -->
+    <string name="menu_editor_action_save">Save</string>
+    <string name="menu_editor_action_delete">Delete</string>
+
 </resources>
