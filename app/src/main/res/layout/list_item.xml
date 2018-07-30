@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeightLarge"
+    android:descendantFocusability="blocksDescendants"
     android:paddingBottom="@dimen/product_item_padding_vertical"
     android:paddingEnd="@dimen/product_item_padding_horizontal"
     android:paddingStart="@dimen/product_item_padding_horizontal"

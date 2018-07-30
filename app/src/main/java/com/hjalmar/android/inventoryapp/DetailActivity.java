@@ -1,5 +1,6 @@
 package com.hjalmar.android.inventoryapp;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -7,10 +8,21 @@ import android.view.MenuItem;
 
 public class DetailActivity extends AppCompatActivity {
 
+    private Uri mIntentUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        mIntentUri = getIntent().getData();
+
+        // Set Activity label
+        if (isAddIntent()) {
+            setTitle(R.string.activity_detail_title_new_product);
+        } else {
+            setTitle(R.string.activity_detail_title_edit_product);
+        }
     }
 
     @Override
@@ -19,6 +31,18 @@ public class DetailActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        if (isAddIntent()) {
+            MenuItem item = menu.findItem(R.id.action_delete);
+            item.setVisible(false);
+        }
+
+        return true;
+    }
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -33,6 +57,10 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean isAddIntent() {
+        return mIntentUri == null;
     }
 
 }
