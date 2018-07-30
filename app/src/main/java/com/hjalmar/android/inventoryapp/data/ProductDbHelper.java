@@ -29,22 +29,13 @@ public class ProductDbHelper extends SQLiteOpenHelper {
      * Create a String that contains the SQL statement to create the products table
      */
     private String buildSchema() {
-        String schema = "CREATE TABLE ";
-
-        schema += ProductEntry.TABLE_NAME;
-        schema += " (";
-        schema += ProductEntry._ID;
-        schema += " INTEGER PRIMARY KEY AUTOINCREMENT, ";
-        schema += ProductEntry.COLUMN_PRODUCT_NAME;
-        schema += " TEXT NOT NULL, ";
-        schema += ProductEntry.COLUMN_PRODUCT_PRICE;
-        schema += " INTEGER NOT NULL, ";
-        schema += ProductEntry.COLUMN_PRODUCT_QUANTITY;
-        schema += " INTEGER NOT NULL DEFAULT 0, ";
-        schema += ProductEntry.COLUMN_PRODUCT_SUPPLIER_NAME;
-        schema += " TEXT NOT NULL, ";
-        schema += ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER;
-        schema += " TEXT);";
+        String schema = "CREATE TABLE " + ProductEntry.TABLE_NAME + " (";
+        schema += ProductEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, ";
+        schema += ProductEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, ";
+        schema += ProductEntry.COLUMN_PRODUCT_PRICE + " INTEGER NOT NULL, ";
+        schema += ProductEntry.COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL DEFAULT 0, ";
+        schema += ProductEntry.COLUMN_PRODUCT_SUPPLIER_NAME + " TEXT NOT NULL, ";
+        schema += ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER + " TEXT NOT NULL);";
 
         return schema;
     }

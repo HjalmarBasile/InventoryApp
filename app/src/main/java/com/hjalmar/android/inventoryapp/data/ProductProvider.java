@@ -204,6 +204,13 @@ public class ProductProvider extends ContentProvider {
                 throw new IllegalArgumentException("Supplier name cannot be empty");
             }
         }
+
+        if (isInsert || values.containsKey(ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER)) {
+            String supplierName = values.getAsString(ProductEntry.COLUMN_PRODUCT_SUPPLIER_PHONE_NUMBER);
+            if (TextUtils.isEmpty(supplierName)) {
+                throw new IllegalArgumentException("Supplier phone number cannot be empty");
+            }
+        }
     }
 
 }
