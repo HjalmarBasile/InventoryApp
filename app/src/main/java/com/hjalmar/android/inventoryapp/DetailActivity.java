@@ -2,6 +2,7 @@ package com.hjalmar.android.inventoryapp;
 
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -107,7 +108,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
         if (isAddIntent()) {
             MenuItem itemDelete = menu.findItem(R.id.action_delete);
-            MenuItem itemBuy = menu.findItem(R.id.action_buy);
+            MenuItem itemBuy = menu.findItem(R.id.action_order);
             itemDelete.setVisible(false);
             itemBuy.setVisible(false);
         }
@@ -122,9 +123,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
                 saveProduct();
                 finish();
                 break;
-            case R.id.action_buy:
-                updateQuantityOfDelta(-1);
-                finish();
+            case R.id.action_order:
+                callSupplier();
                 break;
             case R.id.action_delete:
                 confirmDeletion();
@@ -215,6 +215,16 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             // we just have to catch the exception and notify the user
             Toast.makeText(this, getString(R.string.detail_save_product_failure), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+        }
+    }
+
+    private void callSupplier() {
+        String supplierPhoneNumber = mSupplierPhoneNumberEditText.getText().toString().trim();
+
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + supplierPhoneNumber));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
         }
     }
 

@@ -15,8 +15,8 @@
     <!-- Menu editor -->
     <string name="menu_editor_action_save">Save</string>
     <string name="menu_editor_action_delete">Delete</string>
-    <string name="menu_editor_action_buy">Buy</string>
-
+    <string name="menu_editor_action_order">Order</string>
+    
     <!-- DB transaction responses -->
     <string name="sale_success">Sold!</string>
     <string name="sale_failure">Sale did not succeed</string>
