@@ -1,17 +1,22 @@
 package com.hjalmar.android.inventoryapp;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.app.NavUtils;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -41,13 +46,39 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     private Uri mIntentUri;
 
+    private View.OnTouchListener mOnTouchListener;
+
+    private static final String PRODUCT_EDITED_KEY = "PRODUCT_EDITED_KEY";
+    private boolean mProductHasBeenEdited;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
+        // Restore mProductHasBeenEdited variable value
+        if (savedInstanceState != null) {
+            mProductHasBeenEdited = savedInstanceState.getBoolean(PRODUCT_EDITED_KEY);
+        } else {
+            mProductHasBeenEdited = false;
+        }
+
         mIntentUri = getIntent().getData();
+
+        mOnTouchListener = new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mProductHasBeenEdited = true;
+                return false;
+            }
+        };
+
+        mProductNameEditText.setOnTouchListener(mOnTouchListener);
+        mProductPriceEditText.setOnTouchListener(mOnTouchListener);
+        mProductQuantityEditText.setOnTouchListener(mOnTouchListener);
+        mSupplierNameEditText.setOnTouchListener(mOnTouchListener);
+        mSupplierPhoneNumberEditText.setOnTouchListener(mOnTouchListener);
 
         // Set Activity label
         if (isAddIntent()) {
@@ -56,6 +87,12 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             setTitle(R.string.activity_detail_title_edit_product);
             getSupportLoaderManager().initLoader(EDIT_PRODUCT_LOADER, null, this);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(PRODUCT_EDITED_KEY, mProductHasBeenEdited);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -85,13 +122,38 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
                 break;
             case R.id.action_delete:
                 break;
-            case android.R.id.home:
-                break;
+            case android.R.id.home: {
+                if (mProductHasBeenEdited) {
+                    showUnsavedChangesDialog(new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            NavUtils.navigateUpFromSameTask(DetailActivity.this);
+                        }
+                    });
+                } else {
+                    NavUtils.navigateUpFromSameTask(this);
+                }
+            }
+            return true;
             default:
                 throw new IllegalArgumentException("Unexpected action id: " + item.getItemId());
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mProductHasBeenEdited) {
+            showUnsavedChangesDialog(new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+        } else {
+            super.onBackPressed();
+        }
     }
 
     private boolean isAddIntent() {
@@ -147,6 +209,23 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             Toast.makeText(this, getString(R.string.detail_save_product_failure), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
+    }
+
+    private void showUnsavedChangesDialog(DialogInterface.OnClickListener discardButtonOnClickListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.unsaved_changes_dialog_msg);
+
+        builder.setPositiveButton(R.string.discard, discardButtonOnClickListener);
+        builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        builder.show();
     }
 
     @NonNull
