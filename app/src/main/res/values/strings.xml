@@ -15,6 +15,7 @@
     <!-- Menu editor -->
     <string name="menu_editor_action_save">Save</string>
     <string name="menu_editor_action_delete">Delete</string>
+    <string name="menu_editor_action_buy">Buy</string>
 
     <!-- DB transaction responses -->
     <string name="sale_success">Sold!</string>
@@ -33,13 +34,16 @@
     <string name="category_supplier_phone">Supplier phone</string>
     <string name="hint_supplier_phone_number">Phone Number</string>
 
-    <string name="activity_detail_title_new_product">Add Product</string>
-    <string name="activity_detail_title_edit_product">Edit Product</string>
+    <string name="activity_detail_title_new_product">Add</string>
+    <string name="activity_detail_title_edit_product">Edit</string>
 
     <string name="detail_save_product_success">Product successfully saved</string>
     <string name="detail_save_product_failure">Error while saving the product</string>
     <string name="detail_delete_product_success">Product successfully deleted</string>
     <string name="detail_delete_product_failure">Error while deleting the product</string>
+
+    <string name="detail_change_quantity_product_failure">Error while changing the quantity of the product</string>
+    <string name="detail_change_quantity_product_success">Quantity updated successfully</string>
 
     <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>

@@ -106,8 +106,10 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         super.onPrepareOptionsMenu(menu);
 
         if (isAddIntent()) {
-            MenuItem item = menu.findItem(R.id.action_delete);
-            item.setVisible(false);
+            MenuItem itemDelete = menu.findItem(R.id.action_delete);
+            MenuItem itemBuy = menu.findItem(R.id.action_buy);
+            itemDelete.setVisible(false);
+            itemBuy.setVisible(false);
         }
 
         return true;
@@ -118,6 +120,10 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         switch (item.getItemId()) {
             case R.id.action_save:
                 saveProduct();
+                finish();
+                break;
+            case R.id.action_buy:
+                updateQuantityOfDelta(-1);
                 finish();
                 break;
             case R.id.action_delete:
@@ -209,6 +215,34 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             // we just have to catch the exception and notify the user
             Toast.makeText(this, getString(R.string.detail_save_product_failure), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+        }
+    }
+
+    private void updateQuantityOfDelta(int quantityDelta) {
+        Integer currentQuantity;
+        try {
+            currentQuantity = Integer.parseInt(mProductQuantityEditText.getText().toString().trim());
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.detail_change_quantity_product_failure), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int finalQuantity = currentQuantity + quantityDelta;
+        if (finalQuantity < 0) {
+            Toast.makeText(this, getString(R.string.sale_not_in_stock), Toast.LENGTH_SHORT).show();
+        } else {
+            ContentValues values = new ContentValues();
+            values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, finalQuantity);
+
+            int rowsUpdated = getContentResolver().update(mIntentUri, values, null, null);
+            String msg;
+            if (rowsUpdated == 0) {
+                msg = getString(R.string.detail_change_quantity_product_failure);
+            } else {
+                msg = getString(R.string.detail_change_quantity_product_success);
+            }
+
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
     }
 
