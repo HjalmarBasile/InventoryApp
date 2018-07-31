@@ -121,6 +121,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
                 finish();
                 break;
             case R.id.action_delete:
+                confirmDeletion();
                 break;
             case android.R.id.home: {
                 if (mProductHasBeenEdited) {
@@ -207,6 +208,54 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             // No need to check for input validation, the provider will take care of it,
             // we just have to catch the exception and notify the user
             Toast.makeText(this, getString(R.string.detail_save_product_failure), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Show an alert dialog to confirm product deletion from user
+     */
+    private void confirmDeletion() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.confirm_deletion);
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteProduct();
+                finish();
+            }
+        });
+        builder.setNegativeButton(R.string.return_back, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        builder.show();
+    }
+
+    /**
+     * Get user input from editor and delete product from db
+     */
+    private void deleteProduct() {
+        if (mIntentUri == null) {
+            throw new IllegalStateException("Single item deletion was requested, but no uri was found");
+        }
+
+        try {
+            String msg;
+            int rowsDeleted = getContentResolver().delete(mIntentUri, null, null);
+            if (rowsDeleted > 0) {
+                msg = getString(R.string.detail_delete_product_success);
+            } else {
+                msg = getString(R.string.detail_delete_product_failure);
+            }
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.detail_delete_product_failure), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }

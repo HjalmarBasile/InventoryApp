@@ -38,6 +38,8 @@
 
     <string name="detail_save_product_success">Product successfully saved</string>
     <string name="detail_save_product_failure">Error while saving the product</string>
+    <string name="detail_delete_product_success">Product successfully deleted</string>
+    <string name="detail_delete_product_failure">Error while deleting the product</string>
 
     <!-- Dialog message when user is leaving editor but hasn't saved changes [CHAR LIMIT=NONE] -->
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
@@ -45,6 +47,11 @@
     <!-- Dialog button text for the option to discard a user's changes [CHAR LIMIT=20] -->
     <string name="discard">Discard</string>
 
-    <!-- Dialog button text for the option to keep editing the current pet [CHAR LIMIT=20] -->
+    <!-- Dialog button text for the option to keep editing the current product [CHAR LIMIT=20] -->
     <string name="keep_editing">Keep Editing</string>
+
+    <string name="confirm_deletion">Delete product?</string>
+    <string name="delete">Delete</string>
+    <string name="return_back">Return Back</string>
+
 </resources>
