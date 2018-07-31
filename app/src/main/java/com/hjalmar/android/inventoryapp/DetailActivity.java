@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -45,6 +46,12 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     @BindView(R.id.edit_supplier_phone_number)
     EditText mSupplierPhoneNumberEditText;
+
+    @BindView(R.id.button_increase)
+    Button mButtonIncrease;
+
+    @BindView(R.id.button_decrease)
+    Button mButtonDecrease;
 
     private static final int EDIT_PRODUCT_LOADER = 2;
 
@@ -83,6 +90,21 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         mProductQuantityEditText.setOnTouchListener(mOnTouchListener);
         mSupplierNameEditText.setOnTouchListener(mOnTouchListener);
         mSupplierPhoneNumberEditText.setOnTouchListener(mOnTouchListener);
+        mButtonIncrease.setOnTouchListener(mOnTouchListener);
+        mButtonDecrease.setOnTouchListener(mOnTouchListener);
+
+        mButtonIncrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateQuantityOfDelta(+1);
+            }
+        });
+        mButtonDecrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateQuantityOfDelta(-1);
+            }
+        });
 
         // Set Activity label
         if (isAddIntent()) {
@@ -246,23 +268,13 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
         int finalQuantity = currentQuantity + quantityDelta;
         if (finalQuantity < 0) {
-            Toast.makeText(this, getString(R.string.sale_not_in_stock), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.detail_change_quantity_product_no_negative), Toast.LENGTH_SHORT).show();
         } else {
-            ContentValues values = new ContentValues();
-            values.put(ProductEntry.COLUMN_PRODUCT_QUANTITY, finalQuantity);
-
-            int rowsUpdated = getContentResolver().update(mIntentUri, values, null, null);
-            String msg;
-            if (rowsUpdated == 0) {
-                msg = getString(R.string.detail_change_quantity_product_failure);
-            } else {
-                msg = getString(R.string.detail_change_quantity_product_success);
-            }
-
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            mProductQuantityEditText.setText(String.valueOf(finalQuantity));
+            Toast.makeText(this, getString(R.string.detail_change_quantity_product_success), Toast.LENGTH_SHORT).show();
         }
     }
-
+    
     /**
      * Show an alert dialog to confirm product deletion from user
      */
