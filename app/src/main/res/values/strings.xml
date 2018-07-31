@@ -16,7 +16,7 @@
     <string name="menu_editor_action_save">Save</string>
     <string name="menu_editor_action_delete">Delete</string>
     <string name="menu_editor_action_order">Order</string>
-    
+
     <!-- DB transaction responses -->
     <string name="sale_success">Sold!</string>
     <string name="sale_failure">Sale did not succeed</string>
@@ -57,5 +57,8 @@
     <string name="confirm_deletion">Delete product?</string>
     <string name="delete">Delete</string>
     <string name="return_back">Return Back</string>
+
+    <!-- String to notify the user there is no permission to call -->
+    <string name="permission_denied">Permission Denied</string>
 
 </resources>

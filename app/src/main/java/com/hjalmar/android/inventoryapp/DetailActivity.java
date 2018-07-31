@@ -1,13 +1,16 @@
 package com.hjalmar.android.inventoryapp;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.CursorLoader;
@@ -221,9 +224,13 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private void callSupplier() {
         String supplierPhoneNumber = mSupplierPhoneNumberEditText.getText().toString().trim();
 
-        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + supplierPhoneNumber));
         if (intent.resolveActivity(getPackageManager()) != null) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, R.string.permission_denied, Toast.LENGTH_SHORT).show();
+                return;
+            }
             startActivity(intent);
         }
     }
