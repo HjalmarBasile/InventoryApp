@@ -89,7 +89,7 @@
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:layout_weight="1"
-            android:text="Increase" />
+            android:text="@string/increase" />
 
         <Button
             android:id="@+id/button_decrease"
@@ -98,7 +98,7 @@
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:layout_weight="1"
-            android:text="Decrease" />
+            android:text="@string/decrease" />
     </LinearLayout>
 
 </LinearLayout>

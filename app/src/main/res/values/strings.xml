@@ -62,4 +62,7 @@
     <!-- String to notify the user there is no permission to call -->
     <string name="permission_denied">Permission Denied</string>
 
+    <string name="increase">Increase</string>
+    <string name="decrease">Decrease</string>
+
 </resources>
